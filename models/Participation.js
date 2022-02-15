@@ -6,4 +6,19 @@ module.exports = (sequelize, DatTypes) => {
       underscored: true,
     }
   );
+
+  Participation.associate = (models) => {
+    Participation.belongsTo(models.User, {
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+    });
+    Participation.belongsTo(models.Event, {
+      foreignKey: {
+        name: "eventId",
+        allowNull: false,
+      },
+    });
+  };
 };

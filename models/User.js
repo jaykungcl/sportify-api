@@ -9,6 +9,13 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
       email: {
         type: DataTypes.STRING,
         unique: true,
@@ -48,6 +55,22 @@ module.exports = (sequelize, DataTypes) => {
         name: "userId",
         allowNull: false,
       },
+    });
+    User.hasMany(models.Friend, {
+      as: "RequestFrom",
+      foreignKey: {
+        name: "requestFromId",
+        allowNull: false,
+      },
+      onDelete: "CASCADE",
+    });
+    User.hasMany(models.Friend, {
+      as: "RequestTo",
+      foreignKey: {
+        name: "requestToId",
+        allowNull: false,
+      },
+      onDelete: "CASCADE",
     });
   };
 

@@ -53,6 +53,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      active: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
