@@ -20,4 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
   };
+
+  return Activity;
 };

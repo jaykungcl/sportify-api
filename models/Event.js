@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
     {
       underscored: true,
@@ -43,8 +47,13 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     Event.belongsTo(models.Activity, {
-      foriegnKey: "activityId",
-      allowNull: false,
+      foriegnKey: { name: "activityId", allowNull: false },
+    });
+    Event.hasMany(models.Participation, {
+      foreignKey: { name: "eventId", allowNull: false },
+      onDelete: "cascade",
     });
   };
+
+  return Event;
 };
