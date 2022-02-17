@@ -13,7 +13,9 @@ exports.join = async (req, res, next) => {
     if (
       await Participation.findOne({ where: { userId: req.user.id, eventId } })
     )
-      return res.status(400).json({ message: "Duplicate user on same event" });
+      return res
+        .status(400)
+        .json({ message: "Cannot have duplicate user on same event" });
 
     await Participation.create({
       userId: req.user.id,

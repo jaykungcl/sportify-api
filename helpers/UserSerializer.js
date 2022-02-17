@@ -13,6 +13,7 @@ exports.getUserById = async (userId) => {
 
 exports.getAllFriends = async (userId) => {
   const friends = await Friend.findAll({
+    ...options,
     where: {
       [Op.or]: [{ requestToId: userId }, { requestFromId: userId }],
       status: "ACCEPTED",
@@ -29,6 +30,7 @@ exports.getAllFriends = async (userId) => {
 
 exports.getRequestedUsers = async (userId) => {
   const friends = await Friend.findAll({
+    ...options,
     where: {
       requestFromId: userId,
       status: "REQUESTED",
@@ -42,6 +44,7 @@ exports.getRequestedUsers = async (userId) => {
 
 exports.getUnansweredUsers = async (userId) => {
   const friends = await Friend.findAll({
+    ...options,
     where: {
       requestToId: userId,
       status: "REQUESTED",
