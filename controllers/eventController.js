@@ -3,11 +3,11 @@ const {
   getById,
   getByCreator,
   getByParticipator,
-} = require("../helpers/serializer");
+} = require("../helpers/EventSerializer");
 
 const { validLocation, validTime } = require("../helpers/validator");
 
-exports.create = (req, res, next) => {
+exports.create = async (req, res, next) => {
   const { title, description, locationLat, locationLng, timeStart, timeEnd } =
     req.body;
   try {
@@ -35,7 +35,7 @@ exports.create = (req, res, next) => {
   }
 };
 
-exports.getAllActive = (req, res, next) => {
+exports.getAllActive = async (req, res, next) => {
   try {
     const events = getAllActive();
     return res.status(200).json({ events });
@@ -44,7 +44,7 @@ exports.getAllActive = (req, res, next) => {
   }
 };
 
-exports.getById = (req, res, next) => {
+exports.getById = async (req, res, next) => {
   const { id } = req.params;
   try {
     const events = getById(id);
@@ -54,7 +54,7 @@ exports.getById = (req, res, next) => {
   }
 };
 
-exports.getByCreator = (req, res, next) => {
+exports.getByCreator = async (req, res, next) => {
   const { id: userId } = req.params;
   try {
     const events = getByCreator(userId);
@@ -64,7 +64,7 @@ exports.getByCreator = (req, res, next) => {
   }
 };
 
-exports.getByParticipator = (req, res, next) => {
+exports.getByParticipator = async (req, res, next) => {
   const { id: userId } = req.params;
   try {
     const events = getByParticipator(userId);
@@ -74,7 +74,7 @@ exports.getByParticipator = (req, res, next) => {
   }
 };
 
-exports.delete = (req, res, next) => {
+exports.delete = async (req, res, next) => {
   const { id } = req.params;
   try {
     const event = getById(id);
@@ -87,7 +87,7 @@ exports.delete = (req, res, next) => {
   }
 };
 
-exports.update = (req, res, next) => {
+exports.update = async (req, res, next) => {
   const { id } = req.params;
   const { title, description, locationLat, locationLng, timeStart, timeEnd } =
     req.body;

@@ -21,4 +21,6 @@ module.exports = (sequelize, DatTypes) => {
       },
     });
   };
+
+  return Participation;
 };
