@@ -112,3 +112,76 @@ exports.facebookLogin = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.register = async (req, res, next) => {
+  try {
+    const { username, email, password, confirmPassword } = req.body;
+
+    if (await User.findOne({ where: { username } }))
+      return res.status(400).json({ message: "This username already exist" });
+
+    if (await User.findOne({ where: { email } }))
+      return res
+        .status(400)
+        .json({ message: "This email has already been registered" });
+
+    if (password.length < 6)
+      return res
+        .status(400)
+        .json({ message: "Password must be 6 characters or longer." });
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Password did not match" });
+    }
+
+    const hashed = await bcrypt.hash(password, 10);
+
+    // const uploaded = await uploadFile(fileStr);
+
+    // const imgUrl = uploaded.url;
+    // console.log(fileStr, imgUrl);
+
+    await User.create({
+      username,
+      email,
+      password: hashed,
+    });
+
+    return res.status(201).json({ message: "User created" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.login = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (!user)
+      return res.status(400).json({ message: "Invalid email or password." });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid email or password." });
+
+    const payload = {
+      id: user.id,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
+      expiresIn: 60 * 60 * 24 * 30,
+    });
+
+    return res.status(200).json({
+      token,
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};

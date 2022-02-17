@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 // const passport = require("passport");
 
+const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const friendRoutes = require("./routes/friendRoutes");
@@ -16,9 +17,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(passport.session())
 
+app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/events", eventRoutes);
 app.use("/friendss", friendRoutes);
+
+app.use((req, res) => {
+  res.status(404).json({ message: "Invalid API endpoint" });
+});
 
 app.use((err, req, res, next) => {
   console.log(err);
