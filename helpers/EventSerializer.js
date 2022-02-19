@@ -1,4 +1,4 @@
-const { Event, Participation } = require("../models");
+const { Event, Participation, User, Activity } = require("../models");
 
 const options = {
   attributes: {
@@ -28,7 +28,7 @@ const options = {
 };
 
 exports.getAllActive = async () => {
-  return await Event.findAll({ active: true });
+  return await Event.findAll({ where: { active: true }, ...options });
 };
 
 exports.getById = async (id) => {

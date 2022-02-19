@@ -1,14 +1,23 @@
 const router = require("express").Router();
 const eventController = require("../controllers/eventController");
 const participationController = require("../controllers/participationController");
+const { authenticate } = require("../middlewares/authenticator");
 
 router.get("/", eventController.getAllActive);
-router.post("/", eventController.create);
+router.post("/", authenticate, eventController.create);
 router.get("/:id", eventController.getById);
-router.delete("/:id", eventController.delete);
+router.delete("/:id", authenticate, eventController.delete);
 
 // participations
-router.post("/:id/join", participationController.join);
-router.delete("/:id/leave", participationController.leave);
+router.post(
+  "/:eventId/participation",
+  authenticate,
+  participationController.join
+);
+router.delete(
+  "/:eventId/participation/:id",
+  authenticate,
+  participationController.leave
+);
 
 module.exports = router;

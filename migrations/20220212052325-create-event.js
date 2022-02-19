@@ -18,11 +18,11 @@ module.exports = {
         allowNull: false,
       },
       location_lat: {
-        type: Sequelize.FLOAT(10, 10),
+        type: Sequelize.FLOAT(10),
         allowNull: false,
       },
       location_lng: {
-        type: Sequelize.FLOAT(10, 10),
+        type: Sequelize.FLOAT(10),
         allowNull: false,
       },
       activity_id: {
