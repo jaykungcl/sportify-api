@@ -17,14 +17,17 @@ exports.authenticate = async (req, res, next) => {
 
   try {
     // Extract payload from token if token is verified
-    const payload = jwt.verify(bearerToken, process.env.JWT_SECRET);
-    const user = getUserById(payload.id);
+    const payload = jwt.verify(bearerToken, process.env.JWT_SECRET_KEY);
+    console.log(payload.id);
+    const user = await getUserById(payload.id);
 
     if (!user) return res.status(401).json({ message: "Invalid token" });
 
     // Set user info in request header
     const formattedResult = JSON.stringify(user);
     req.user = JSON.parse(formattedResult);
+    console.log("attach req.user");
+    console.log(user);
   } catch (err) {
     next(err);
   }

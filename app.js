@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/events", eventRoutes);
-app.use("/friendss", friendRoutes);
+app.use("/friends", friendRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Invalid API endpoint" });
