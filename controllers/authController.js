@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const axios = require("axios");
+const jwt = require("jsonwebtoken");
 
 // models
 const { User } = require("../models/");
@@ -115,10 +116,10 @@ exports.facebookLogin = async (req, res, next) => {
 
 exports.register = async (req, res, next) => {
   try {
-    const { username, email, password, confirmPassword } = req.body;
+    const { email, firstName, lastName, password, confirmPassword } = req.body;
 
-    if (await User.findOne({ where: { username } }))
-      return res.status(400).json({ message: "This username already exist" });
+    // if (await User.findOne({ where: { username } }))
+    //   return res.status(400).json({ message: "This username already exist" });
 
     if (await User.findOne({ where: { email } }))
       return res
@@ -136,12 +137,12 @@ exports.register = async (req, res, next) => {
     const hashed = await bcrypt.hash(password, 10);
 
     // const uploaded = await uploadFile(fileStr);
-
     // const imgUrl = uploaded.url;
     // console.log(fileStr, imgUrl);
 
     await User.create({
-      username,
+      firstName,
+      lastName,
       email,
       password: hashed,
     });
@@ -154,6 +155,7 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email);
 
   try {
     const user = await User.findOne({ where: { email } });

@@ -8,7 +8,7 @@ const options = {
 };
 
 exports.getUserById = async (userId) => {
-  return await User.findByPk(userId, options);
+  return await User.findOne({ where: { id: userId }, ...options });
 };
 
 exports.getAllFriends = async (userId) => {

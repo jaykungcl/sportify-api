@@ -23,17 +23,27 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: "",
+        id: "4",
         name: "Rockclimbing Party Night",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: "1",
+        id: "5",
         name: "Tennis Party",
         created_at: new Date(),
         updated_at: new Date(),
       },
     ]);
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+    await queryInterface.bulkDelete("activities", null, {});
   },
 };

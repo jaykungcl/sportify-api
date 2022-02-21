@@ -10,15 +10,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      userId: {
-        type: DataTypes.INTEGER,
-      },
       locationLat: {
-        type: DataTypes.FLOAT(10, 10),
+        type: DataTypes.FLOAT(10),
         allowNull: false,
       },
       locationLng: {
-        type: DataTypes.FLOAT(10, 10),
+        type: DataTypes.FLOAT(10),
         allowNull: false,
       },
       timeStart: {
@@ -41,13 +38,13 @@ module.exports = (sequelize, DataTypes) => {
 
   Event.associate = (models) => {
     Event.belongsTo(models.User, {
-      foriegnKey: {
+      foreignKey: {
         name: "userId",
         allowNull: false,
       },
     });
     Event.belongsTo(models.Activity, {
-      foriegnKey: { name: "activityId", allowNull: false },
+      foreignKey: { name: "activityId", allowNull: false },
     });
     Event.hasMany(models.Participation, {
       foreignKey: { name: "eventId", allowNull: false },
