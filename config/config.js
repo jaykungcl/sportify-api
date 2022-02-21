@@ -1,34 +1,9 @@
-require("dotenv").config();
 
-<<<<<<< HEAD
-{
-	development: {
-		username: "root";
-		password: "0988319563o";
-		database: "sportify";
-		host: "127.0.0.1";
-		dialect: "mysql";
-	}
-	test: {
-		username: "root";
-		password: null;
-		database: "database_test";
-		host: "127.0.0.1";
-		dialect: "mysql";
-	}
-	production: {
-		username: "root";
-		password: null;
-		database: "database_production";
-		host: "127.0.0.1";
-		dialect: "mysql";
-	}
-}
-=======
+
 module.exports = {
   development: {
     username: "root",
-    password: process.env.MYSQL_PASSWORD,
+    password: "0988319563o",
     database: "sportify",
     host: "127.0.0.1",
     dialect: "mysql",
@@ -48,4 +23,3 @@ module.exports = {
     dialect: "mysql",
   },
 };
->>>>>>> 82c94e6e3a99c782738b4e0553d0fa1e36b437e2
