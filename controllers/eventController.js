@@ -29,7 +29,6 @@ exports.create = async (req, res, next) => {
       });
 
     // if(await Category)
-
     console.log({
       title,
       detail,
