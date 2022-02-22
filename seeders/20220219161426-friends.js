@@ -3,9 +3,9 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // const hashedPassword = await bcrypt.hash("1234", 10);
-    return queryInterface.bulkInsert("participants", [
+    return queryInterface.bulkInsert("friends", [
       {
-        id: "1",
+        // id: "1",
         requestToId: "2",
         requestFromId: "3",
         status: "REQUESTED",
@@ -13,7 +13,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: "2",
+        // id: "2",
         requestToId: "1",
         requestFromId: "2",
         status: "REQUESTED",
@@ -21,15 +21,15 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: "3",
+        // id: "3",
         requestToId: "2",
         requestFromId: "3",
-        status: "ACCPETED",
+        status: "ACCEPTED",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: "4",
+        // id: "4",
         requestToId: "1",
         requestFromId: "3",
         status: "ACCEPTED",
@@ -37,7 +37,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: "5",
+        // id: "5",
         requestToId: "3",
         requestFromId: "1",
         status: "REQUESTED",
@@ -54,6 +54,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("activities", null, {});
+    await queryInterface.bulkDelete("friends", null, {});
   },
 };

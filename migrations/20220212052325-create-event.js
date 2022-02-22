@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       detail: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       location_lat: {
@@ -44,6 +44,13 @@ module.exports = {
           },
           key: "id",
         },
+      },
+      max_people: {
+        type: Sequelize.INTEGER,
+      },
+      level: {
+        type: Sequelize.ENUM("BEGINNER", "INTERMEDIATE", "ADVANCE"),
+        allowNull: false,
       },
       time_start: {
         type: Sequelize.DATE,

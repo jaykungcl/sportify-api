@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       detail: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       locationLat: {
@@ -29,6 +29,13 @@ module.exports = (sequelize, DataTypes) => {
       active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
+      },
+      maxPeople: {
+        type: DataTypes.INTEGER,
+      },
+      level: {
+        type: DataTypes.ENUM("BEGINNER", "INTERMEDIATE", "ADVANCE"),
+        allowNull: false,
       },
     },
     {
