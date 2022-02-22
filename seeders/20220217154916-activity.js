@@ -5,31 +5,31 @@ module.exports = {
     // const hashedPassword = await bcrypt.hash("1234", 10);
     return queryInterface.bulkInsert("activities", [
       {
-        id: "1",
+        // id: "1",
         name: "Basketball Party Night",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: "2",
+        // id: "2",
         name: "Lasergame Party Night",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: "3",
+        // id: "3",
         name: "Football Party Night",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: "4",
+        // id: "4",
         name: "Rockclimbing Party Night",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: "5",
+        // id: "5",
         name: "Tennis Party",
         created_at: new Date(),
         updated_at: new Date(),

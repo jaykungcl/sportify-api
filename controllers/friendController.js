@@ -9,7 +9,7 @@ const { Friend, User } = require("../models");
 exports.getAllFriends = async (req, res, next) => {
   const { id: userId } = req.params;
   try {
-    const users = getAllFriends(userId);
+    const users = await getAllFriends(userId);
     return res.status(200).json({ users });
   } catch (err) {
     next(err);
@@ -18,7 +18,7 @@ exports.getAllFriends = async (req, res, next) => {
 
 exports.getPendingRequests = async (req, res, next) => {
   try {
-    const users = getRequestedUsers(req.user.id);
+    const users = await getRequestedUsers(req.user.id);
     return res.status(200).json({ users });
   } catch (err) {
     next(err);
@@ -27,7 +27,7 @@ exports.getPendingRequests = async (req, res, next) => {
 
 exports.getUnansweredRequests = async (req, res, next) => {
   try {
-    const users = getUnansweredUsers(req.user.id);
+    const users = await getUnansweredUsers(req.user.id);
     return res.status(200).json({ users });
   } catch (err) {
     next(err);
