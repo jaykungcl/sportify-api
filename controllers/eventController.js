@@ -69,8 +69,8 @@ exports.getAllActive = async (req, res, next) => {
 exports.getById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const events = await getById(id);
-    return res.status(200).json({ events });
+    const event = await getById(id);
+    return res.status(200).json({ event });
   } catch (err) {
     next(err);
   }

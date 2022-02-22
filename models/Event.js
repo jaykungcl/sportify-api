@@ -30,6 +30,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
+      maxPeople: {
+        type: DataTypes.INTEGER,
+      },
+      level: {
+        type: DataTypes.ENUM("BEGINNER", "INTERMEDIATE", "ADVANCE"),
+        allowNull: false,
+      },
     },
     {
       underscored: true,
