@@ -48,14 +48,15 @@ exports.getByCreator = async (userId) => {
 };
 
 exports.getByParticipator = async (userId) => {
-  const participations = await Participation.findAll({ userId });
+  const participations = await Participation.findAll({ where: { userId } });
 
   const eventIds = participations.map((item) => item.eventId);
+  console.log(eventIds);
 
   return await Event.findAll({
     ...options,
     where: {
-      id: [eventIds],
+      id: eventIds,
     },
   });
 };

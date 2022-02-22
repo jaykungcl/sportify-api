@@ -90,6 +90,7 @@ exports.getByParticipator = async (req, res, next) => {
   const { id: userId } = req.params;
   try {
     const events = await getByParticipator(userId);
+    // console.log(events);
     return res.status(200).json({ events });
   } catch (err) {
     next(err);

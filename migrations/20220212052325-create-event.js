@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       detail: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       location_lat: {
