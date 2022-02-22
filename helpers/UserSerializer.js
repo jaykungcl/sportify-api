@@ -1,10 +1,34 @@
 const { Op } = require("sequelize");
-const { User, Friend } = require("../models");
+const { User, Friend, Event, Activity, Participation } = require("../models");
 
 const options = {
   attributes: {
     exclude: ["password", "googleId", "facebookId", "createdAt", "updatedAt"],
   },
+  include: [
+    {
+      model: Event,
+      attributes: {
+        exclude: ["userId", "activityId"],
+      },
+      include: [{ model: Activity, attributes: ["id", "name"] }],
+    },
+    {
+      model: Participation,
+      attributes: {
+        exclude: ["userId", "eventId"],
+      },
+      include: [
+        {
+          model: Event,
+          attributes: {
+            exclude: ["userId", "activityId"],
+          },
+          include: [{ model: Activity, attributes: ["id", "name"] }],
+        },
+      ],
+    },
+  ],
 };
 
 exports.getUserById = async (userId) => {
