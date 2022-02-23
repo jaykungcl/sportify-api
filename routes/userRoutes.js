@@ -2,6 +2,7 @@ const router = require("express").Router();
 const eventController = require("../controllers/eventController");
 const friendController = require("../controllers/friendController");
 const userController = require("../controllers/userController");
+const authenticate = require("../middlewares/authenticator");
 
 // user related events
 router.get("/:id/events", eventController.getByCreator);
