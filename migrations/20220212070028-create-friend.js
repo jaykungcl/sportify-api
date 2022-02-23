@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      requestToId: {
+      request_to_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -19,7 +19,7 @@ module.exports = {
           key: "id",
         },
       },
-      requestFromId: {
+      request_from_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
