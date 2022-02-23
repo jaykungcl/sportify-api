@@ -38,7 +38,7 @@ exports.generateToken = async (req, res, next) => {
   if (req.user) {
     const { id, email, firstName, lastName, imgUrl } = req.user;
 
-    const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "30d",
     });
 

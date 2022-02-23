@@ -9,3 +9,12 @@ exports.validTime = (timeStart, timeEnd) => {
 // exports.validCategory = (categoryId) => {
 //   return (await)
 // }
+
+exports.validLevel = (cat) => {
+  return cat === "BEGINNER" || cat === "INTERMEDIATE" || cat === "ADVANCE";
+};
+
+exports.validNumPeople = (num) => {
+  const n = Number(num);
+  return Math.abs(n) === n && Number.isInteger(n);
+};

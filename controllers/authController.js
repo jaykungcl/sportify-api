@@ -1,6 +1,9 @@
 const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
+const util = require("util");
+const fs = require("fs");
+const cloudinary = require("../config/cloudinary");
 
 // models
 const { User } = require("../models/");
@@ -8,6 +11,8 @@ const { User } = require("../models/");
 // google auth
 const { OAuth2Client, auth } = require("google-auth-library");
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+const uploadPromise = util.promisify(cloudinary.uploader.upload);
 
 exports.googleLogin = async (req, res, next) => {
   try {
@@ -115,6 +120,7 @@ exports.facebookLogin = async (req, res, next) => {
 };
 
 exports.register = async (req, res, next) => {
+  console.log("auth");
   try {
     const { email, firstName, lastName, password, confirmPassword } = req.body;
 
@@ -140,11 +146,18 @@ exports.register = async (req, res, next) => {
     // const imgUrl = uploaded.url;
     // console.log(fileStr, imgUrl);
 
+    let result = {};
+    if (req.file) {
+      result = await uploadPromise(req.file.path);
+      fs.unlinkSync(req.file.path);
+    }
+
     await User.create({
       firstName,
       lastName,
       email,
       password: hashed,
+      imgUrl: result.secure_url,
     });
 
     return res.status(201).json({ message: "User created" });

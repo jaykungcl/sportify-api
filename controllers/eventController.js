@@ -6,11 +6,22 @@ const {
   getByParticipator,
 } = require("../helpers/EventSerializer");
 
-const { validLocation, validTime } = require("../helpers/validator");
+const {
+  validLocation,
+  validTime,
+  validLevel,
+  validNumPeople,
+} = require("../helpers/validator");
+
+const util = require("util");
+const fs = require("fs");
+const cloudinary = require("../config/cloudinary");
+const uploadPromise = util.promisify(cloudinary.uploader.upload);
 
 exports.create = async (req, res, next) => {
   console.log(req.user.id);
-  const { title, detail, activityId, lat, lng, start, end } = req.body;
+  const { title, detail, activityId, lat, lng, start, end, level, maxPeople } =
+    req.body;
   try {
     const locationLat = parseFloat(lat);
     const locationLng = parseFloat(lng);
@@ -28,17 +39,20 @@ exports.create = async (req, res, next) => {
         message: "Invalid time input",
       });
 
+    if (!validLevel(level))
+      return res.status(400).json({ message: "Invalid level" });
+
+    if (!validNumPeople(maxPeople))
+      return res.status(400).json({
+        message: "Number of max attendant must be a positive integer",
+      });
+
     // if(await Category)
-    console.log({
-      title,
-      detail,
-      activityId,
-      locationLat,
-      locationLng,
-      timeStart,
-      timeEnd,
-      userId: req.user.id,
-    });
+    let result = {};
+    if (req.file) {
+      result = await uploadPromise(req.file.path);
+      fs.unlinkSync(req.file.path);
+    }
 
     const event = await Event.create({
       title,
@@ -48,6 +62,9 @@ exports.create = async (req, res, next) => {
       locationLng,
       timeStart,
       timeEnd,
+      level,
+      maxPeople,
+      imgUrl: result.secure_url,
       userId: req.user.id,
     });
 

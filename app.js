@@ -15,7 +15,7 @@ const friendRoutes = require("./routes/friendRoutes");
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(passport.session())
+app.use("/static", express.static("public/images"));
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
