@@ -4,9 +4,7 @@ const { generateToken } = require("../middlewares/authenticator");
 const upload = require("../middlewares/upload");
 
 // email register and login
-router.get("/", (req, res) => {
-  return res.status(200).json({ messgae: "auth" });
-});
+router.post("/", authenticate, generateToken);
 router.post(
   "/register",
   upload.single("profile"),
