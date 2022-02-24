@@ -6,10 +6,10 @@ exports.join = async (req, res, next) => {
   console.log(eventId);
   try {
     const event = getById(eventId);
-    // if (event.userId === req.user.id)
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Host cannot join their own events" });
+    if (event.userId === req.user.id)
+      return res
+        .status(400)
+        .json({ message: "Host cannot join their own events" });
 
     if (
       await Participation.findOne({ where: { userId: req.user.id, eventId } })

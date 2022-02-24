@@ -16,6 +16,7 @@ const {
 const util = require("util");
 const fs = require("fs");
 const cloudinary = require("../config/cloudinary");
+const Activity = require("../models/Activity");
 const uploadPromise = util.promisify(cloudinary.uploader.upload);
 
 exports.create = async (req, res, next) => {
@@ -47,7 +48,10 @@ exports.create = async (req, res, next) => {
         message: "Number of max attendant must be a positive integer",
       });
 
-    // if(await Category)
+    if (!(await Activity.findOne({ where: { id: activityId } })))
+      return res.status(400).json({ message: "Invalid activity id" });
+
+    // upload photo to cloudinary
     let result = {};
     if (req.file) {
       result = await uploadPromise(req.file.path);
