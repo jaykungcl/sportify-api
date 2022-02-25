@@ -7,6 +7,8 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const friendRoutes = require("./routes/friendRoutes");
+const activityRoute = require("./routes/activityRoutes");
+const { allowedNodeEnvironmentFlags } = require("process");
 
 // config
 // require("./config/passport")(passport);
@@ -21,13 +23,14 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/events", eventRoutes);
 app.use("/friends", friendRoutes);
+app.use("/activities", activityRoute);
 
 app.use((req, res) => {
-  res.status(404).json({ message: "Invalid API endpoint" });
+	res.status(404).json({ message: "Invalid API endpoint" });
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
+	console.log(err);
 });
 
 const PORT = process.env.PORT || 8000;

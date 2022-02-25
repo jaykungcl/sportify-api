@@ -119,7 +119,7 @@ exports.getByParticipator = async (req, res, next) => {
 
 exports.getActivity = async (req, res, next) => {
 	try {
-		const allActivity = await Activity.findAll();
+		const allActivity = await Activity.findAll({ attributes: ["id", "name"] });
 		return res.status(200).json({ allActivity });
 	} catch (error) {
 		console.log(err.message);
