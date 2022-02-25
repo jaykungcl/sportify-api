@@ -7,18 +7,19 @@ const upload = require("../middlewares/upload");
 router.get("/", eventController.getAllActive);
 router.post("/", authenticate, upload.single("event"), eventController.create);
 router.get("/:id", eventController.getById);
+router.get("/activity", eventController.getActivity);
 router.delete("/:id", authenticate, eventController.delete);
 
 // participations
 router.post(
-  "/:eventId/participation",
-  authenticate,
-  participationController.join
+	"/:eventId/participation",
+	authenticate,
+	participationController.join
 );
 router.delete(
-  "/:eventId/participation/:id",
-  authenticate,
-  participationController.leave
+	"/:eventId/participation/:id",
+	authenticate,
+	participationController.leave
 );
 
 module.exports = router;
