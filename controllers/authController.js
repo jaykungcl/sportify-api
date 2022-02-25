@@ -15,8 +15,11 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const uploadPromise = util.promisify(cloudinary.uploader.upload);
 
 exports.googleLogin = async (req, res, next) => {
+  console.log("in gglogin");
   try {
-    const { tokenId: idToken } = req.body;
+    const { token: idToken } = req.body;
+
+    console.log(req.body, idToken);
 
     // Verify GOOGLE idToken
     const ticket = await client

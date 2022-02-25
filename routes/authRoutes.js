@@ -17,6 +17,6 @@ router.post("/login", authController.login, generateToken);
 router.post("/login/google", authController.googleLogin, generateToken);
 
 // facebook login
-router.post("/login/google", authController.facebookLogin, generateToken);
+router.post("/login/facebook", authController.facebookLogin, generateToken);
 
 module.exports = router;
