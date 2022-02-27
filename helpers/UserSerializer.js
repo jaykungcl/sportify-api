@@ -35,6 +35,10 @@ exports.getUserById = async (userId) => {
   return await User.findOne({ where: { id: userId }, ...options });
 };
 
+exports.updateBioById = async (userId, bio) => {
+  return await User.update({ bio: bio }, { where: { id: userId } });
+};
+
 exports.getAllFriends = async (userId) => {
   const friends = await Friend.findAll({
     ...options,

@@ -11,6 +11,8 @@ router.get("/:id/participations", eventController.getByParticipator);
 // user data
 router.get("/:id", userController.getProfile);
 
+router.put("/bio/:id", userController.updateBio);
+
 // friends
 router.get("/:id/friends", friendController.getAllFriends);
 
