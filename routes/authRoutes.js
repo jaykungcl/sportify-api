@@ -6,10 +6,10 @@ const { generateToken, authenticate } = require("../middlewares/authenticator");
 // email register and login
 router.post("/", authenticate, generateToken);
 router.post(
-	"/register",
-	upload.single("profile"),
-	authController.register,
-	generateToken
+  "/register",
+  upload.single("profile"),
+  authController.register,
+  generateToken
 );
 router.post("/login", authController.login, generateToken);
 

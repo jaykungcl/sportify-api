@@ -145,10 +145,6 @@ exports.register = async (req, res, next) => {
 
     const hashed = await bcrypt.hash(password, 10);
 
-    // const uploaded = await uploadFile(fileStr);
-    // const imgUrl = uploaded.url;
-    // console.log(fileStr, imgUrl);
-
     let result = {};
     if (req.file) {
       result = await uploadPromise(req.file.path);
