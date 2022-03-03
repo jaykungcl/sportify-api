@@ -1,4 +1,5 @@
 const router = require("express").Router();
+
 const eventController = require("../controllers/eventController");
 const participationController = require("../controllers/participationController");
 const { authenticate } = require("../middlewares/authenticator");
@@ -17,7 +18,7 @@ router.post(
 	participationController.join
 );
 router.delete(
-	"/:eventId/participation/:id",
+	"/:eventId/participation/:userId",
 	authenticate,
 	participationController.leave
 );
